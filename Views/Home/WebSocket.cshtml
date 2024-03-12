@@ -11,7 +11,23 @@
         const host = "wss://echo.websocket.org/";
         const myDiv = document.querySelector('#div1');
 
-       
+       //建立WebSocket物件 
+        const socket = new WebSocket(host);
+
+        socket.onopen = () => {
+            console.log("連線成功");
+            //發送訊息到websocket Server 
+            socket.send("Hello 網路插座");
+        }
+
+        //websocket Server 回傳的資料 
+        socket.onmessage = event => {
+            console.log(event.data);
+            socket.close();
+        }
+        socket.onclose = () => {
+            console.log("連線中斷");
+        }
 
     </script>
 }
