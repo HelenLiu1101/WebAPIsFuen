@@ -54,12 +54,14 @@ namespace WebAPIsFuen.Controllers
                 {
                     PropertyNameCaseInsensitive = true
                 };
+                //json字串轉成message物件 反序列化
                 Message? receivedMessage = JsonSerializer.Deserialize<Message>(json, options);
                
                 if (receivedMessage != null)
                 {
                   //  userName = receivedMessage.UserName;
                     receivedMessage.Timestamp = DateTime.Now;
+                    //將Message物件轉成json字串 序列化 
                     string updatedJson = JsonSerializer.Serialize(receivedMessage);
                     Broadcast(updatedJson); //接收到的資料傳給Broadcase自訂函式，在此函式中廣播給所有連線的使用者
                 }
